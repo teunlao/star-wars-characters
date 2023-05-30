@@ -24,7 +24,16 @@ const Layout = ({ children }) => {
         }
       }}
     >
-      {children}
+      <Box
+        sx={{
+          maxWidth: '1440px',
+          width: '100%',
+          position: 'relative',
+          margin: '0 auto'
+        }}
+      >
+        {children}
+      </Box>
     </Box>
   )
 }

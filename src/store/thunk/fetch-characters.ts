@@ -1,16 +1,19 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { Character } from '../../types/Character'
+import { BASE_API_URL, PEOPLE } from '../../utils/constants.utils'
 
 type FetchTodosError = {
   message: string
 }
 
 export const fetchCharacters = createAsyncThunk<
-  Character[],
-  number,
+  { characters: Character[]; count: number },
+  { page: number; search: string },
   { rejectValue: FetchTodosError }
->('characters/fetch', async (page: number, thunkApi) => {
-  const response = await fetch(`https://swapi.dev/api/people/?page=${page}`)
+>('characters/fetch', async ({ page, search }, thunkApi) => {
+  const response = await fetch(
+    `${BASE_API_URL}${PEOPLE}/?page=${page}&search=${search}`
+  )
 
   if (response.status !== 200) {
     return thunkApi.rejectWithValue({
@@ -19,5 +22,8 @@ export const fetchCharacters = createAsyncThunk<
   }
 
   const data = await response.json()
-  return data.results as Character[]
+  return {
+    characters: data.results as Character[],
+    count: data.count as number
+  }
 })
