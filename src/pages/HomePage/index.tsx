@@ -1,15 +1,34 @@
 import React, { useState, useEffect } from 'react'
 import { Grid, Box } from '@mui/material'
 import { Link } from 'react-router-dom'
+import { fetchCharacters } from '../../store/thunk/fetch-characters'
+import { useDispatch } from '../../store'
+import { useSelector } from 'react-redux'
+import {
+  nextPage,
+  previousPage,
+  selectCharacters,
+  selectCharactersStatus,
+  selectCurrentPage
+} from '../../store/charachers.slice'
 
 const HomePage = () => {
   const [searchQuery, setSearchQuery] = useState('')
-  const [characters, setCharacters] = useState([])
 
-  // Load characters from API
+  const dispatch = useDispatch()
+  const characters = useSelector(selectCharacters)
+  const status = useSelector(selectCharactersStatus)
+  const currentPage = useSelector(selectCurrentPage)
+
   useEffect(() => {
-    // Fetch data here and setCharacters
-  }, [])
+    if (status === 'idle') {
+      dispatch(fetchCharacters(currentPage))
+    }
+  }, [status, dispatch, currentPage])
+
+  const handleNext = () => dispatch(nextPage())
+
+  const handlePrev = () => dispatch(previousPage())
 
   const filteredCharacters = characters.filter((character) =>
     character.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -26,7 +45,7 @@ const HomePage = () => {
                 to={`/character/${character?.id}`}
                 style={{ textDecoration: 'none' }}
               >
-                CharacterCard
+                {character.name}
               </Link>
             </Grid>
           ))}
