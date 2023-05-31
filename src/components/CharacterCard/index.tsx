@@ -12,8 +12,11 @@ const CharacterCard = ({ character }: CharacterCardProps) => {
   return (
     <Card
       sx={{
-        minWidth: 250,
         margin: 1,
+        minWidth: '275px',
+        [theme.breakpoints.down('sm')]: {
+          maxWidth: '400px'
+        },
         cursor: 'pointer',
         transition: 'transform .2s, box-shadow .3s',
         boxShadow: '0 8px 40px -12px rgba(0,0,0,0.3)',

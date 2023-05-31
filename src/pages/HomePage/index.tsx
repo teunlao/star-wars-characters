@@ -15,6 +15,7 @@ import {
 import CharacterList from '../../components/CharacterList'
 import useDebounce from '../../hooks/useDebounce'
 import SearchInput from '../../components/SearchInput'
+import { fetchFilms } from '../../store/thunk/fetch-films'
 
 const HomePage = () => {
   const [searchQuery, setSearchQuery] = useState('')
@@ -25,6 +26,10 @@ const HomePage = () => {
   const status = useSelector(selectCharactersStatus)
   const currentPage = useSelector(selectCurrentPage)
   const totalPages = useSelector(selectTotalPages)
+
+  useEffect(() => {
+    dispatch(fetchFilms())
+  }, [])
 
   useEffect(() => {
     dispatch(
@@ -54,8 +59,11 @@ const HomePage = () => {
     <div>
       <Box sx={{ px: 0, py: 4 }}>
         <Stack
-          direction="row"
-          spacing={2}
+          direction={{
+            sm: 'column',
+            md: 'row'
+          }}
+          gap={2}
           sx={{ justifyContent: 'center', alignItems: 'center', mb: 4 }}
         >
           <SearchInput

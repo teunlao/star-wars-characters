@@ -13,6 +13,9 @@ const SearchInput = ({ value, onChange }: SearchInputProps) => {
     <TextField
       placeholder={'Search your character...'}
       sx={{
+        [theme.breakpoints.down('md')]: {
+          width: '100%'
+        },
         flex: 2,
         minWidth: '320px',
         '& .MuiInputLabel-root.Mui-focused': {

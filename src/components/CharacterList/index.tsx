@@ -16,7 +16,15 @@ const CharacterList = ({ characters }: CharacterListProps) => {
     <Grid container spacing={2}>
       {characters.length && status !== 'loading' ? (
         characters.map((character) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} key={character.id}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+            lg={3}
+            key={character.id}
+            sx={{ justifyContent: 'center', display: 'flex' }}
+          >
             <CharacterCard character={character} />
           </Grid>
         ))

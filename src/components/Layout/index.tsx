@@ -5,8 +5,8 @@ const Layout = ({ children }) => {
   return (
     <Box
       sx={{
-
-        width: '100vw',
+        p: 2,
+        width: '100%',
         minHeight: '100vh',
         position: 'relative', // relative positioning for ::after pseudo-element
         '::after': {

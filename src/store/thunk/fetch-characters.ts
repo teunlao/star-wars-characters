@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { Character } from '../../types/Character'
 import { BASE_API_URL, PEOPLE } from '../../utils/constants.utils'
-import { updateCharactersProperties } from '../../utils/functions'
 
 type FetchTodosError = {
   message: string
