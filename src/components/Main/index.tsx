@@ -81,8 +81,7 @@ const Main = () => {
         >
           <SearchInput onChange={(v) => setSearchQuery(v)} value={searchQuery} />
           <Pagination
-            // @ts-ignore
-            color="warning"
+            color={'warning' as any}
             sx={{ flex: 1 }}
             count={totalPages}
             page={currentPage}

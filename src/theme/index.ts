@@ -2,8 +2,7 @@ import { createTheme } from '@mui/material'
 
 const theme = createTheme({
   palette: {
-    mode: 'dark',
-
+    mode: 'dark'
   },
   typography: {
     fontFamily: '"Star Jedi", sans-serif',

@@ -44,15 +44,9 @@ export const charactersSlice = createSlice({
       })
       .addCase(
         fetchCharacters.fulfilled,
-        (
-          state,
-          action: PayloadAction<{ count: number; characters: Character[] }>
-        ) => {
+        (state, action: PayloadAction<{ count: number; characters: Character[] }>) => {
           state.status = 'succeeded'
-          state.characters = updateCharactersProperties(
-            action.payload.characters,
-            state.currentPage
-          )
+          state.characters = updateCharactersProperties(action.payload.characters, state.currentPage)
           state.totalCount = action.payload.count
           // You would need to get the total count from the API response
         }
@@ -66,14 +60,10 @@ export const charactersSlice = createSlice({
 
 export const { nextPage, previousPage, setPageNumber } = charactersSlice.actions
 
-export const selectCharacters = (state: RootState) =>
-  state.characters.characters
-export const selectCharactersStatus = (state: RootState) =>
-  state.characters.status
-export const selectCharactersError = (state: RootState) =>
-  state.characters.error
-export const selectCurrentPage = (state: RootState) =>
-  state.characters.currentPage
+export const selectCharacters = (state: RootState) => state.characters.characters
+export const selectCharactersStatus = (state: RootState) => state.characters.status
+export const selectCharactersError = (state: RootState) => state.characters.error
+export const selectCurrentPage = (state: RootState) => state.characters.currentPage
 
 export const selectTotalPages = (state: RootState) => {
   const count = Math.floor(state.characters.totalCount / 10)

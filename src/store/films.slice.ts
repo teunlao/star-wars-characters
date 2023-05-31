@@ -1,9 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Film } from '../types/Film'
 import { fetchFilms } from './thunk/fetch-films'
 
 interface CharacterState {
-  films: Film[]
+  films: any[]
   status: 'idle' | 'loading' | 'succeeded' | 'failed'
   error: string | null | undefined
 }
@@ -23,7 +22,7 @@ export const filmsSlice = createSlice({
       .addCase(fetchFilms.pending, (state) => {
         state.status = 'loading'
       })
-      .addCase(fetchFilms.fulfilled, (state, action: PayloadAction<Film[]>) => {
+      .addCase(fetchFilms.fulfilled, (state, action: PayloadAction<any[]>) => {
         state.status = 'succeeded'
         state.films = action.payload
       })

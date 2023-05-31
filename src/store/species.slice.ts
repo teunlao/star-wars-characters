@@ -22,13 +22,10 @@ export const speciesSlice = createSlice({
       .addCase(fetchSpecies.pending, (state) => {
         state.status = 'loading'
       })
-      .addCase(
-        fetchSpecies.fulfilled,
-        (state, action: PayloadAction<any[]>) => {
-          state.status = 'succeeded'
-          state.species = action.payload
-        }
-      )
+      .addCase(fetchSpecies.fulfilled, (state, action: PayloadAction<any[]>) => {
+        state.status = 'succeeded'
+        state.species = action.payload
+      })
       .addCase(fetchSpecies.rejected, (state, action) => {
         state.status = 'failed'
         state.error = action.error.message

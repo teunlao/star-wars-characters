@@ -22,13 +22,10 @@ export const planetsSlice = createSlice({
       .addCase(fetchPlanets.pending, (state) => {
         state.status = 'loading'
       })
-      .addCase(
-        fetchPlanets.fulfilled,
-        (state, action: PayloadAction<any[]>) => {
-          state.status = 'succeeded'
-          state.planets = action.payload
-        }
-      )
+      .addCase(fetchPlanets.fulfilled, (state, action: PayloadAction<any[]>) => {
+        state.status = 'succeeded'
+        state.planets = action.payload
+      })
       .addCase(fetchPlanets.rejected, (state, action) => {
         state.status = 'failed'
         state.error = action.error.message
