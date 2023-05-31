@@ -1,14 +1,18 @@
 import { Box } from '@mui/material'
-import backgroundImage from '../../public/assets/img.png'
+import backgroundImage from '../../assets/img/img.png'
+import React from 'react'
 
-const Layout = ({ children }) => {
+interface LayoutProps {
+  children: React.ReactNode
+}
+const Layout = ({ children }: LayoutProps) => {
   return (
     <Box
       sx={{
         p: 2,
         width: '100%',
         minHeight: '100vh',
-        position: 'relative', // relative positioning for ::after pseudo-element
+        position: 'relative',
         '::after': {
           content: '""',
           position: 'absolute',
@@ -20,7 +24,7 @@ const Layout = ({ children }) => {
           backgroundPosition: 'center',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
-          filter: 'blur(5px) brightness(0.3)', // adjust these values as needed
+          filter: 'blur(5px) brightness(0.3)',
           zIndex: -1 // keep the image behind the content
         }
       }}

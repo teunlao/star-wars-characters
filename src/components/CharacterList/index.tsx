@@ -5,11 +5,7 @@ import { Character } from '../../types/Character'
 import { useSelector } from 'react-redux'
 import { selectCharactersStatus } from '../../store/charachers.slice'
 import { useDispatch } from '../../store'
-import {
-  openDialog,
-  selectSelectedCharacterId,
-  setCharacterId
-} from '../../store/app.slice'
+import { openDialog, setCharacterId } from '../../store/app.slice'
 
 interface CharacterListProps {
   characters: Character[]
@@ -17,7 +13,6 @@ interface CharacterListProps {
 
 const CharacterList = ({ characters }: CharacterListProps) => {
   const status = useSelector(selectCharactersStatus)
-  const selectedCharacterId = useSelector(selectSelectedCharacterId)
   const dispatch = useDispatch()
 
   const handleClick = (id: number) => {

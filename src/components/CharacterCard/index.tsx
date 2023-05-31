@@ -27,11 +27,7 @@ const CharacterCard = ({ character }: CharacterCardProps) => {
         }
       }}
     >
-      <img
-        src={getImageUrl(character.id)}
-        alt="character-portrait"
-        id={character.id.toString()}
-      />
+      <img src={getImageUrl(character.id)} alt="character-portrait" id={character.id.toString()} />
       <CardContent>
         <Typography variant="body1" component="div">
           {character.name}

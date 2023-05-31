@@ -7,7 +7,6 @@ import {
   nextPage,
   previousPage,
   selectCharacters,
-  selectCharactersStatus,
   selectCurrentPage,
   selectTotalPages,
   setPageNumber
@@ -24,13 +23,12 @@ import { selectPlanets } from '../../store/planets.slice'
 import { selectSpecies } from '../../store/species.slice'
 import { selectSelectedCharacterId } from '../../store/app.slice'
 
-const HomePage = () => {
+const Main = () => {
   const [searchQuery, setSearchQuery] = useState('')
   const debouncedSearchQuery = useDebounce(searchQuery, 300)
 
   const dispatch = useDispatch()
   const characters = useSelector(selectCharacters)
-  const status = useSelector(selectCharactersStatus)
   const currentPage = useSelector(selectCurrentPage)
   const totalPages = useSelector(selectTotalPages)
   const films = useSelector(selectFilms)
@@ -39,9 +37,7 @@ const HomePage = () => {
   const selectedCharacterId = useSelector(selectSelectedCharacterId)
 
   const isDialogDataLoaded = useMemo(() => {
-    return [films.length, planets.length, species.length].every(
-      (itemLength) => itemLength
-    )
+    return [films.length, planets.length, species.length].every((itemLength) => itemLength)
   }, [films, planets, species])
 
   useEffect(() => {
@@ -67,18 +63,13 @@ const HomePage = () => {
 
   const handlePrev = () => dispatch(previousPage())
 
-  const handlePageChange = (
-    event: React.ChangeEvent<unknown>,
-    value: number
-  ) => {
+  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
     dispatch(setPageNumber(value))
   }
 
   return (
     <>
-      {isDialogDataLoaded && selectedCharacterId !== undefined && (
-        <CharacterDetailsDialog />
-      )}
+      {isDialogDataLoaded && selectedCharacterId !== undefined && <CharacterDetailsDialog />}
       <Box sx={{ px: 0, py: 4 }}>
         <Stack
           direction={{
@@ -88,11 +79,9 @@ const HomePage = () => {
           gap={2}
           sx={{ justifyContent: 'center', alignItems: 'center', mb: 4 }}
         >
-          <SearchInput
-            onChange={(v) => setSearchQuery(v)}
-            value={searchQuery}
-          />
+          <SearchInput onChange={(v) => setSearchQuery(v)} value={searchQuery} />
           <Pagination
+            // @ts-ignore
             color="warning"
             sx={{ flex: 1 }}
             count={totalPages}
@@ -106,4 +95,4 @@ const HomePage = () => {
   )
 }
 
-export default HomePage
+export default Main

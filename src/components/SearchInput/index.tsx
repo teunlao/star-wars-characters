@@ -11,7 +11,7 @@ const SearchInput = ({ value, onChange }: SearchInputProps) => {
 
   return (
     <TextField
-      placeholder={'Search your character...'}
+      placeholder={'Find your character...'}
       sx={{
         [theme.breakpoints.down('md')]: {
           width: '100%'
@@ -19,18 +19,18 @@ const SearchInput = ({ value, onChange }: SearchInputProps) => {
         flex: 2,
         minWidth: '320px',
         '& .MuiInputLabel-root.Mui-focused': {
-          color: 'yellow'
+          color: `${theme.palette.warning.main}`
         },
         '& .MuiOutlinedInput-root': {
           boxShadow: '0 0 6px white',
           '&:hover fieldset': {
             transition: 'all .2s ease-in-out',
-            borderColor: 'yellow',
-            boxShadow: '0 0 10px #FFC107',
+            borderColor: `${theme.palette.warning.main}`,
+            boxShadow: `0 0 10px ${theme.palette.warning.main}`,
             color: `${theme.palette.warning.main}`
           },
           '&.Mui-focused fieldset': {
-            borderColor: 'yellow',
+            borderColor: `${theme.palette.warning.main}`,
             boxShadow: `0 0 10px ${theme.palette.warning.main}`,
             color: 'yellow'
           },
