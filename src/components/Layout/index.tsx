@@ -5,8 +5,9 @@ const Layout = ({ children }) => {
   return (
     <Box
       sx={{
-        height: '100vh',
+
         width: '100vw',
+        minHeight: '100vh',
         position: 'relative', // relative positioning for ::after pseudo-element
         '::after': {
           content: '""',
@@ -19,14 +20,14 @@ const Layout = ({ children }) => {
           backgroundPosition: 'center',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
-          filter: 'blur(3px) brightness(0.3)', // adjust these values as needed
+          filter: 'blur(5px) brightness(0.3)', // adjust these values as needed
           zIndex: -1 // keep the image behind the content
         }
       }}
     >
       <Box
         sx={{
-          maxWidth: '1440px',
+          maxWidth: '1200px',
           width: '100%',
           position: 'relative',
           margin: '0 auto'

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Pagination, TextField } from '@mui/material'
+import { Box, Pagination, Stack, TextField } from '@mui/material'
 import { fetchCharacters } from '../../store/thunk/fetch-characters'
 import { useDispatch } from '../../store'
 import { useSelector } from 'react-redux'
@@ -14,6 +14,7 @@ import {
 } from '../../store/charachers.slice'
 import CharacterList from '../../components/CharacterList'
 import useDebounce from '../../hooks/useDebounce'
+import SearchInput from '../../components/SearchInput'
 
 const HomePage = () => {
   const [searchQuery, setSearchQuery] = useState('')
@@ -29,19 +30,13 @@ const HomePage = () => {
     dispatch(
       fetchCharacters({
         page: currentPage,
-        search: ''
-      })
-    )
-  }, [currentPage])
-
-  useEffect(() => {
-    dispatch(setPageNumber(1))
-    dispatch(
-      fetchCharacters({
-        page: 1,
         search: debouncedSearchQuery
       })
     )
+  }, [debouncedSearchQuery, currentPage])
+
+  useEffect(() => {
+    dispatch(setPageNumber(1))
   }, [debouncedSearchQuery])
 
   const handleNext = () => dispatch(nextPage())
@@ -55,23 +50,26 @@ const HomePage = () => {
     dispatch(setPageNumber(value))
   }
 
-  const filteredCharacters = characters.filter((character) =>
-    character.name.toLowerCase().includes(searchQuery.toLowerCase())
-  )
-
   return (
     <div>
-      <Box>
-        <Pagination
-          count={totalPages}
-          page={currentPage}
-          onChange={handlePageChange}
-        />
-        {status}
-        <TextField
-          onChange={(e) => setSearchQuery(e.target.value)}
-          value={searchQuery}
-        />
+      <Box sx={{ px: 0, py: 4 }}>
+        <Stack
+          direction="row"
+          spacing={2}
+          sx={{ justifyContent: 'center', alignItems: 'center', mb: 4 }}
+        >
+          <SearchInput
+            onChange={(v) => setSearchQuery(v)}
+            value={searchQuery}
+          />
+          <Pagination
+            color="warning"
+            sx={{ flex: 1 }}
+            count={totalPages}
+            page={currentPage}
+            onChange={handlePageChange}
+          />
+        </Stack>
         <CharacterList characters={characters} />
       </Box>
     </div>

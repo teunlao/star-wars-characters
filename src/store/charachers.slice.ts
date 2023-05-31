@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Character } from '../types/Character'
 import { fetchCharacters } from './thunk/fetch-characters'
 import { RootState } from './index'
+import { updateCharactersProperties } from '../utils/functions'
 
 interface CharacterState {
   characters: Character[]
@@ -48,7 +49,10 @@ export const charactersSlice = createSlice({
           action: PayloadAction<{ count: number; characters: Character[] }>
         ) => {
           state.status = 'succeeded'
-          state.characters = action.payload.characters
+          state.characters = updateCharactersProperties(
+            action.payload.characters,
+            state.currentPage
+          )
           state.totalCount = action.payload.count
           // You would need to get the total count from the API response
         }
@@ -71,6 +75,8 @@ export const selectCharactersError = (state: RootState) =>
 export const selectCurrentPage = (state: RootState) =>
   state.characters.currentPage
 
-export const selectTotalPages = (state: RootState) =>
-  Math.floor(state.characters.totalCount / 10)
+export const selectTotalPages = (state: RootState) => {
+  const count = Math.floor(state.characters.totalCount / 10)
+  return count > 0 ? count : 1
+}
 export default charactersSlice.reducer
