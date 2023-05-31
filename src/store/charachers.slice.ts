@@ -1,4 +1,3 @@
-// Add additional state for pagination
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Character } from '../types/Character'
 import { fetchCharacters } from './thunk/fetch-characters'
@@ -48,7 +47,6 @@ export const charactersSlice = createSlice({
           state.status = 'succeeded'
           state.characters = updateCharactersProperties(action.payload.characters, state.currentPage)
           state.totalCount = action.payload.count
-          // You would need to get the total count from the API response
         }
       )
       .addCase(fetchCharacters.rejected, (state, action) => {

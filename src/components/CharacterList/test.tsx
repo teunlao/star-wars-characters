@@ -11,7 +11,6 @@ import { Character } from '../../types/Character'
 const mockCharacters: Partial<Character>[] = [
   { id: 0, name: 'Character 1' },
   { id: 1, name: 'Character 2' }
-  // Добавьте здесь больше свойств в соответствии с вашим типом `Character`
 ]
 
 const mockStatus = 'succeeded'

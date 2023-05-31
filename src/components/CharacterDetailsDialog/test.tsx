@@ -22,7 +22,7 @@ describe('DialogComponent', () => {
       reducer: {
         app: appReducer,
         characters: charactersReducer
-        // другие редьюсеры...
+        // ...
       },
       preloadedState: {
         app: {

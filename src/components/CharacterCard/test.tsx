@@ -28,6 +28,4 @@ describe('CharacterCard', () => {
     const name = screen.getByText('Test Character')
     expect(name).toBeInTheDocument()
   })
-
-  // другие тесты...
 })
