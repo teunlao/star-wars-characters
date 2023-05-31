@@ -35,4 +35,6 @@ export const planetsSlice = createSlice({
       })
   }
 })
+
+export const selectPlanets = (state: any) => state.planets.planets
 export default planetsSlice.reducer

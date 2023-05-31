@@ -5,8 +5,10 @@ import { useDispatch as _useDispatch } from 'react-redux'
 import filmsReducer from './films.slice'
 import planetsReducer from './planets.slice'
 import speciesReducer from './species.slice'
+import appReducer from './app.slice'
 export const store = configureStore({
   reducer: {
+    app: appReducer,
     characters: characterReducer,
     films: filmsReducer,
     planets: planetsReducer,

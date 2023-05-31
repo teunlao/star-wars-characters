@@ -35,4 +35,6 @@ export const speciesSlice = createSlice({
       })
   }
 })
+
+export const selectSpecies = (state: any) => state.species.species
 export default speciesSlice.reducer

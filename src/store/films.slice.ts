@@ -33,4 +33,6 @@ export const filmsSlice = createSlice({
       })
   }
 })
+
+export const selectFilms = (state: any) => state.films.films
 export default filmsSlice.reducer

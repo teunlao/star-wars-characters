@@ -35,7 +35,7 @@ const SearchInput = ({ value, onChange }: SearchInputProps) => {
             color: 'yellow'
           },
           '& .MuiOutlinedInput-input': {
-            color: 'white' // Change input text color to yellow
+            color: 'white'
           }
         }
       }}

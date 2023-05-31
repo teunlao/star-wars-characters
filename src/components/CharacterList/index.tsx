@@ -4,6 +4,12 @@ import CharacterCard from '../CharacterCard'
 import { Character } from '../../types/Character'
 import { useSelector } from 'react-redux'
 import { selectCharactersStatus } from '../../store/charachers.slice'
+import { useDispatch } from '../../store'
+import {
+  openDialog,
+  selectSelectedCharacterId,
+  setCharacterId
+} from '../../store/app.slice'
 
 interface CharacterListProps {
   characters: Character[]
@@ -11,12 +17,20 @@ interface CharacterListProps {
 
 const CharacterList = ({ characters }: CharacterListProps) => {
   const status = useSelector(selectCharactersStatus)
+  const selectedCharacterId = useSelector(selectSelectedCharacterId)
+  const dispatch = useDispatch()
+
+  const handleClick = (id: number) => {
+    dispatch(setCharacterId(id))
+    dispatch(openDialog())
+  }
 
   return (
     <Grid container spacing={2}>
       {characters.length && status !== 'loading' ? (
-        characters.map((character) => (
+        characters.map((character, index) => (
           <Grid
+            onClick={() => handleClick(index)}
             item
             xs={12}
             sm={6}

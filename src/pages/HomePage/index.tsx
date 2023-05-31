@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { Box, Pagination, Stack, TextField } from '@mui/material'
 import { fetchCharacters } from '../../store/thunk/fetch-characters'
 import { useDispatch } from '../../store'
@@ -16,6 +16,13 @@ import CharacterList from '../../components/CharacterList'
 import useDebounce from '../../hooks/useDebounce'
 import SearchInput from '../../components/SearchInput'
 import { fetchFilms } from '../../store/thunk/fetch-films'
+import { fetchSpecies } from '../../store/thunk/fetch-species'
+import { fetchPlanets } from '../../store/thunk/fetch-planets'
+import CharacterDetailsDialog from '../../components/CharacterDetailsDialog'
+import { selectFilms } from '../../store/films.slice'
+import { selectPlanets } from '../../store/planets.slice'
+import { selectSpecies } from '../../store/species.slice'
+import { selectSelectedCharacterId } from '../../store/app.slice'
 
 const HomePage = () => {
   const [searchQuery, setSearchQuery] = useState('')
@@ -26,9 +33,21 @@ const HomePage = () => {
   const status = useSelector(selectCharactersStatus)
   const currentPage = useSelector(selectCurrentPage)
   const totalPages = useSelector(selectTotalPages)
+  const films = useSelector(selectFilms)
+  const planets = useSelector(selectPlanets)
+  const species = useSelector(selectSpecies)
+  const selectedCharacterId = useSelector(selectSelectedCharacterId)
+
+  const isDialogDataLoaded = useMemo(() => {
+    return [films.length, planets.length, species.length].every(
+      (itemLength) => itemLength
+    )
+  }, [films, planets, species])
 
   useEffect(() => {
     dispatch(fetchFilms())
+    dispatch(fetchSpecies())
+    dispatch(fetchPlanets())
   }, [])
 
   useEffect(() => {
@@ -56,7 +75,10 @@ const HomePage = () => {
   }
 
   return (
-    <div>
+    <>
+      {isDialogDataLoaded && selectedCharacterId !== undefined && (
+        <CharacterDetailsDialog />
+      )}
       <Box sx={{ px: 0, py: 4 }}>
         <Stack
           direction={{
@@ -80,7 +102,7 @@ const HomePage = () => {
         </Stack>
         <CharacterList characters={characters} />
       </Box>
-    </div>
+    </>
   )
 }
 
